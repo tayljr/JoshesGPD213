@@ -35,10 +35,13 @@ public class AISensor : MonoBehaviour, ISense
     public void CollectConditions(AntAIAgent aAgent, AntAICondition aWorldState)
     {
         aWorldState.Set(Fighter.canHit, canHit);
+        CheckHasSword();
         aWorldState.Set(Fighter.hasSword, hasSword);
         CheckNearBadie();
         aWorldState.Set(Fighter.nearBadie, nearBadie);
+        CheckHasGun();
         aWorldState.Set(Fighter.hasGun, hasGun);
+        CheckHasAmmo();
         aWorldState.Set(Fighter.hasAmmo, hasAmmo);
         aWorldState.Set(Fighter.seeBadie, seeBadie);
         aWorldState.Set(Fighter.seeSword,seeSword);

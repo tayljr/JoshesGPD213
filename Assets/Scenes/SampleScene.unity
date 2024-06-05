@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 237585887}
   - component: {fileID: 237585886}
   - component: {fileID: 237585885}
+  - component: {fileID: 237585890}
   m_Layer: 0
   m_Name: Sword
   m_TagString: Untagged
@@ -256,6 +257,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &237585890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 237585884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f97848f0e359cb444a95ca724ad27ebc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &252086498
 GameObject:
   m_ObjectHideFlags: 0
@@ -2180,6 +2193,8 @@ GameObject:
   - component: {fileID: 1537602783}
   - component: {fileID: 1537602784}
   - component: {fileID: 1537602782}
+  - component: {fileID: 1537602786}
+  - component: {fileID: 1537602785}
   m_Layer: 0
   m_Name: AI
   m_TagString: Untagged
@@ -2338,6 +2353,33 @@ MonoBehaviour:
   seeAmmo: 0
   CanUseWeapon: 0
   badie: {fileID: 599196239}
+--- !u!114 &1537602785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1537602777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94124bbaae361fa448fa379bfed0ad11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasSword: 0
+  hasGun: 0
+  hasAmmo: 0
+--- !u!114 &1537602786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1537602777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6952351e9d599954083d5151061beb04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

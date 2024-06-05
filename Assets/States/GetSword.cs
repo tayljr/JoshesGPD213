@@ -15,10 +15,18 @@ public class GetSword : AntAIState
 
     private void OnEnable()
     {
+        if (mainObject == null)
+        {
+            mainObject = gameObject.transform.parent.gameObject;
+        }
         mainObject.GetComponent<ColliderTriggerManager>().OnTriggerEnter_Event += mainTrigger;
     }
     private void OnDisable()
     {
+        if (mainObject == null)
+        {
+            mainObject = gameObject.transform.parent.gameObject;
+        }
         mainObject.GetComponent<ColliderTriggerManager>().OnTriggerEnter_Event -= mainTrigger;
     }
 
