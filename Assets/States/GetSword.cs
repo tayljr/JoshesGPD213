@@ -7,7 +7,8 @@ using UnityEngine;
 
 public class GetSword : AntAIState
 {
-
+    public Memory memory;
+    public TurnTowards turnTowards;
     private AISensor aiSensor;
     public GameObject mainObject;
 
@@ -40,13 +41,24 @@ public class GetSword : AntAIState
     public override void Enter()
     {
         base.Enter();
+        
+        if (memory == null)
+        {
+            memory = gameObject.GetComponentInParent<Memory>();
+        }
+        
         swordItem = FindObjectOfType<Sword>().gameObject;
+        turnTowards = gameObject.GetComponentInParent<TurnTowards>();
+        turnTowards.enabled = true;
     }
 
     public override void Execute(float aDeltaTime, float aTimeScale)
     {
         base.Execute(aDeltaTime, aTimeScale);
-        
+        if (memory.memoryDic.ContainsKey(swordItem))
+        {
+            turnTowards.NewTarget(memory.memoryDic[swordItem]);
+        }
     }
 
     private void mainTrigger(Collider other)
@@ -54,6 +66,7 @@ public class GetSword : AntAIState
         if (other == swordItem.GetComponent<Collider>())
         {
             mainObject.GetComponent<Inventory>().hasSword = true;
+            turnTowards.enabled = false;
             Finish();
         }
     }

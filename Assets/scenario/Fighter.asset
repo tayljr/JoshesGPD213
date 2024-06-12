@@ -54,7 +54,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 4442337830053322995, guid: 1e8cfb6f4b2ca7f4e89e337e5b9e2011, type: 3}
     cost: 1
-    position: {x: 753.4187, y: 320.2223}
+    position: {x: 744.4187, y: 316.2223}
     pre:
     - id: 2
       value: 0
@@ -125,7 +125,7 @@ MonoBehaviour:
       value: 1
   - name: go to badie
     isDefault: 0
-    state: {fileID: 4442337830053322995, guid: 1e8cfb6f4b2ca7f4e89e337e5b9e2011, type: 3}
+    state: {fileID: 8709877118471336319, guid: d33730e0a47d8a249856928f9977c8f3, type: 3}
     cost: 2
     position: {x: 502.14148, y: 1275.3641}
     pre:
@@ -204,7 +204,7 @@ MonoBehaviour:
       value: 0
   - name: Can Use Sword
     isDefault: 0
-    state: {fileID: 4442337830053322995, guid: 1e8cfb6f4b2ca7f4e89e337e5b9e2011, type: 3}
+    state: {fileID: 6961272275079469823, guid: 81558aaf647e13e459120080100307c5, type: 3}
     cost: 1
     position: {x: 258.9212, y: 985.0198}
     pre:
@@ -217,7 +217,7 @@ MonoBehaviour:
       value: 1
   - name: can use gun
     isDefault: 0
-    state: {fileID: 4442337830053322995, guid: 1e8cfb6f4b2ca7f4e89e337e5b9e2011, type: 3}
+    state: {fileID: 3466972736889678155, guid: 7f2617e2282d96c49a381e62e6448f90, type: 3}
     cost: 1
     position: {x: 507.71875, y: 986.67566}
     pre:
@@ -247,7 +247,7 @@ MonoBehaviour:
       value: 0
   - name: can't use gun
     isDefault: 0
-    state: {fileID: 4442337830053322995, guid: 1e8cfb6f4b2ca7f4e89e337e5b9e2011, type: 3}
+    state: {fileID: 9202107072010306220, guid: 5a16d71149277fc489cdc18f5bfe8713, type: 3}
     cost: 1
     position: {x: 741.7816, y: 988.9825}
     pre:
@@ -280,7 +280,7 @@ MonoBehaviour:
     - id: 3
       value: 0
     - id: 4
-      value: 1
+      value: 0
     - id: 5
       value: 0
     - id: 6

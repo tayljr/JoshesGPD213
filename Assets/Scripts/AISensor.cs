@@ -29,9 +29,22 @@ public class AISensor : MonoBehaviour, ISense
     public bool seeGun = false;
     public bool seeAmmo = false;
     public bool CanUseWeapon = false;
-    
+
+    public Memory memory;
     public Transform badie;
+    public GameObject badieGO;
+    public GameObject swordGO;
+    public GameObject gunGO;
+    public GameObject ammoGO;
     
+    void Start()
+    {
+        if (memory == null)
+        {
+            memory = gameObject.GetComponentInChildren<Memory>();
+        }
+    }
+
     public void CollectConditions(AntAIAgent aAgent, AntAICondition aWorldState)
     {
         aWorldState.Set(Fighter.canHit, canHit);
@@ -43,9 +56,13 @@ public class AISensor : MonoBehaviour, ISense
         aWorldState.Set(Fighter.hasGun, hasGun);
         CheckHasAmmo();
         aWorldState.Set(Fighter.hasAmmo, hasAmmo);
+        CheckSeeBadie();
         aWorldState.Set(Fighter.seeBadie, seeBadie);
+        CheckSeeSword();
         aWorldState.Set(Fighter.seeSword,seeSword);
+        CheckSeeGun();
         aWorldState.Set(Fighter.seeGun,seeGun);
+        CheckSeeAmmo();
         aWorldState.Set(Fighter.seeAmmo,seeAmmo);
         aWorldState.Set(Fighter.canUseWeapon, CanUseWeapon);
     }
@@ -70,4 +87,34 @@ public class AISensor : MonoBehaviour, ISense
     {
         hasAmmo = gameObject.GetComponent<Inventory>().hasAmmo;
     }
+
+    private void CheckSeeBadie()
+    {
+        if(badieGO != null)
+        {
+            seeBadie = memory.memoryDic.ContainsKey(badieGO);
+        }
+    }
+    private void CheckSeeSword()
+    {
+        if (swordGO != null)
+        {
+            seeSword = memory.memoryDic.ContainsKey(swordGO);
+        }
+    }
+    private void CheckSeeGun()
+    {
+        if (gunGO != null)
+        {
+            seeGun = memory.memoryDic.ContainsKey(gunGO);
+        }
+    }
+    private void CheckSeeAmmo()
+    {
+        if (ammoGO != null)
+        {
+            seeAmmo = memory.memoryDic.ContainsKey(ammoGO);
+        }
+    }
+    
 }

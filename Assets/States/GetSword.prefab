@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3181985772735272827}
   - component: {fileID: -7301387710681281843}
-  - component: {fileID: -2084827596764044059}
+  - component: {fileID: -1664379967435493511}
   m_Layer: 0
   m_Name: GetSword
   m_TagString: Untagged
@@ -45,9 +45,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89e901d8bb74fd443b2f2632a40c622a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  memory: {fileID: 0}
+  turnTowards: {fileID: 0}
   mainObject: {fileID: 0}
-  swordItem: {fileID: 6724870163123887446, guid: 1e1f32820e69a29409fb59555560e0b6, type: 3}
---- !u!65 &-2084827596764044059
+  swordItem: {fileID: 5636093296839211587, guid: 1e1f32820e69a29409fb59555560e0b6, type: 3}
+--- !u!65 &-1664379967435493511
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

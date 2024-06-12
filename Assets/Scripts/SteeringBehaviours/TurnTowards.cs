@@ -27,4 +27,10 @@ public class TurnTowards : MonoBehaviour
         float angle = Vector3.SignedAngle(transform.forward, targetDir, Vector3.up);
         gameObject.GetComponent<Rigidbody>().AddRelativeTorque(0, angle * turnSpeed, 0);
     }
+
+    public void NewTarget(Vector3 newTarget)
+    {
+        target = null;
+        targetPos = newTarget;
+    }
 }
