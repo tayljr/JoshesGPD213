@@ -5,9 +5,13 @@ using UnityEngine;
 public class WorldScanner : MonoBehaviour
 {
     public Vector3Int size;
-    public Node[,] gridOfObstacles;
+    public Node[,,] gridOfObstacles;
     public LayerMask layerMask;
+    public bool scan2D = false;
+    private int sizeY = 1;
     public bool debug = false;
+    public bool showUnblocked = false;
+    public bool showBlocked = false;
     
     // Start is called before the first frame update
     void Start()
@@ -25,35 +29,62 @@ public class WorldScanner : MonoBehaviour
     }
     private void OnDrawGizmos()
     {
+        if (scan2D)
+        {
+            sizeY = 1;
+        }
+        else
+        {
+            sizeY = size.y;
+        }
         for (int x = 0; x < size.x; x++)
         {
             for (int z = 0; z < size.z; z++)
             {
-                if (gridOfObstacles != null && gridOfObstacles[x, z].isBlocked)
+                for (int y = 0; y < sizeY; y++)
                 {
-                    Gizmos.color = Color.red;
+                    if(gridOfObstacles != null)
+                    {
+                        if (gridOfObstacles[x, y, z].isBlocked && showBlocked)
+                        {
+                            Gizmos.color = Color.red;
+                            Gizmos.DrawCube(transform.position + new Vector3(x, y, z), Vector3.one);
+                        }
+                        else if (showUnblocked)
+                        {
+                            Gizmos.color = Color.green;
+                            Gizmos.DrawCube(transform.position + new Vector3(x, y, z), Vector3.one);
+                        }
+                    }
                 }
-                else
-                {
-                    Gizmos.color = Color.green;
-                }
-                Gizmos.DrawCube(new Vector3(x, 0, z), Vector3.one);
             }
         }
     }
 
     private void ScanWorld()
     {
-        gridOfObstacles = new Node[size.x, size.z];
+        if (scan2D)
+        {
+            sizeY = 1;
+        }
+        else
+        {
+            sizeY = size.y;
+        }
+        gridOfObstacles = new Node[size.x, size.y, size.z];
         for (int x = 0; x < size.x; x++)
         {
             for (int z = 0; z < size.z; z++)
             {
-                gridOfObstacles[x, z] = new Node();
-                if (Physics.CheckBox(new Vector3(x, 0, z), new Vector3(0.5f, 0.5f, 0.5f), Quaternion.identity, layerMask))
+                for (int y = 0; y < sizeY; y++)
                 {
-                    // Something is there
-                    gridOfObstacles[x, z].isBlocked = true;
+                    gridOfObstacles[x, y, z] = new Node();
+                    if (Physics.CheckBox(transform.position + new Vector3(x, y, z), new Vector3(0.5f, 0.5f, 0.5f), Quaternion.identity,
+                            layerMask))
+                    {
+                        // Something is there
+                        gridOfObstacles[x, y, z].isBlocked = true;
+                    }
                 }
             }
         }

@@ -152,11 +152,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2934be556f02a7f45b3917ec8ad1daa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  size: {x: 20, y: 1, z: 20}
+  size: {x: 20, y: 10, z: 20}
   layerMask:
     serializedVersion: 2
     m_Bits: 55
+  scan2D: 0
   debug: 0
+  showUnblocked: 0
+  showBlocked: 1
 --- !u!4 &459441683
 Transform:
   m_ObjectHideFlags: 0

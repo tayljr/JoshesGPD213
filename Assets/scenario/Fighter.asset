@@ -232,7 +232,7 @@ MonoBehaviour:
       value: 1
   - name: out of ammo
     isDefault: 0
-    state: {fileID: 4442337830053322995, guid: 1e8cfb6f4b2ca7f4e89e337e5b9e2011, type: 3}
+    state: {fileID: 1917016860681604406, guid: fb06a64fffc582c4f8dda12b935417c2, type: 3}
     cost: 1
     position: {x: 973.7562, y: 987.9296}
     pre:
