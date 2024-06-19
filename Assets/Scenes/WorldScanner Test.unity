@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 459441683}
   - component: {fileID: 459441682}
+  - component: {fileID: 459441684}
   m_Layer: 0
   m_Name: World Scanner
   m_TagString: Untagged
@@ -156,7 +157,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 55
-  scan2D: 0
+  scan2D: 1
   debug: 0
   showUnblocked: 0
   showBlocked: 1
@@ -175,6 +176,31 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &459441684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 459441681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56f09fc2aa924e24793d4d8327208366, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  startPos: {x: 0, y: 0, z: 0}
+  open: []
+  closed: []
+  worldScanner: {fileID: 459441682}
 --- !u!1 &474671620
 GameObject:
   m_ObjectHideFlags: 0
