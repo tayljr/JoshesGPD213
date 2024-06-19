@@ -61,7 +61,7 @@ public class WorldScanner : MonoBehaviour
         }
     }
 
-    private void ScanWorld()
+    public void ScanWorld()
     {
         if (scan2D)
         {
