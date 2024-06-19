@@ -26,6 +26,7 @@ public class DijkstraFill : SerializedMonoBehaviour
     }
     public void StartFill(Vector3Int currentPos)
     {
+        //todo need to change current pos to get pos from node ... i think + inside while loop
         open.Add(worldScanner.gridOfObstacles[currentPos.x, currentPos.y, currentPos.z]);
         while (open.Count > 0)
         {
@@ -39,18 +40,25 @@ public class DijkstraFill : SerializedMonoBehaviour
 
                 for(int x = -1; x < 2; x++)
                 {
-                    for (int y = -1; y < 2; y++)
+                    for (int z = -1; z < 2; z++)
                     {
-                        for (int z = -1; z < 2; z++)
+                        for (int y = -1; y < 2; y++)
                         {
                             //check to see the node exists please :)
                             Vector3Int nextPos = new Vector3Int(currentPos.x + x , currentPos.y + y, currentPos.z + z);
+                            Debug.Log(worldScanner.gridOfObstacles.GetLength(0));
+                            Debug.Log(worldScanner.gridOfObstacles.GetLength(1));
+                            Debug.Log(worldScanner.gridOfObstacles.GetLength(2));
+                            if(nextPos.x < 0 || nextPos.y < 0 || nextPos.z < 0 || nextPos.x >= worldScanner.size.x || nextPos.y >= worldScanner.sizeY || nextPos.z >= worldScanner.size.z)
+                            {
+                                continue;
+                            }
                             Node nextWorldNode = worldScanner.gridOfObstacles[nextPos.x, nextPos.y, nextPos.z];
                             if (closed.Contains(nextWorldNode) || open.Contains(nextWorldNode))
                             {
                                 continue;
                             }
-                            else if (!nextWorldNode.isBlocked)
+                            if (!nextWorldNode.isBlocked)
                             {
                                 open.Add(nextWorldNode);
                             }

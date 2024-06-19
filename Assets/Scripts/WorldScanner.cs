@@ -8,7 +8,7 @@ public class WorldScanner : MonoBehaviour
     public Node[,,] gridOfObstacles;
     public LayerMask layerMask;
     public bool scan2D = false;
-    private int sizeY = 1;
+    public int sizeY = 1;
     public bool debug = false;
     public bool showUnblocked = false;
     public bool showBlocked = false;
