@@ -120,37 +120,43 @@ public class DijkstraFill : SerializedMonoBehaviour
     }
     private void OnDrawGizmos()
     {
-        for (int x = 0; x < worldScanner.size.x; x++)
+        if (worldScanner != null)
         {
-            for (int z = 0; z < worldScanner.size.z; z++)
+            for (int x = 0; x < worldScanner.size.x; x++)
             {
-                for (int y = 0; y < worldScanner.sizeY; y++)
+                for (int z = 0; z < worldScanner.size.z; z++)
                 {
-                    if(worldScanner.gridOfObstacles != null)
+                    for (int y = 0; y < worldScanner.sizeY; y++)
                     {
-                        if (worldScanner.gridOfObstacles[x, y, z].isBlocked && worldScanner.showBlocked)
+                        if (worldScanner.gridOfObstacles != null)
                         {
-                            Gizmos.color = Color.red;
-                            //Gizmos.DrawCube(transform.position + new Vector3(x, y, z), Vector3.one);
+                            if (worldScanner.gridOfObstacles[x, y, z].isBlocked && worldScanner.showBlocked)
+                            {
+                                Gizmos.color = Color.red;
+                                //Gizmos.DrawCube(transform.position + new Vector3(x, y, z), Vector3.one);
+                            }
+                            else if (worldScanner.showUnblocked)
+                            {
+                                Gizmos.color = Color.green;
+                                //Gizmos.DrawCube(transform.position + new Vector3(x, y, z), Vector3.one);
+                            }
+
+                            if (open.Contains(worldScanner.gridOfObstacles[x, y, z]) ||
+                                nextOpen.Contains(worldScanner.gridOfObstacles[x, y, z]))
+                            {
+                                Gizmos.color = new Color(1f, 0.9215686f, 0.01568628f, 0.5f);
+                            }
+
+                            if (closed.Contains(worldScanner.gridOfObstacles[x, y, z]))
+                            {
+                                Gizmos.color = Color.grey;
+                            }
+
+                            Gizmos.DrawCube(transform.position + new Vector3(x * worldScanner.nodeSize.x / 2, y * worldScanner.nodeSize.y / 2, z * worldScanner.nodeSize.z / 2), worldScanner.nodeSize);
                         }
-                        else if (worldScanner.showUnblocked)
-                        {
-                            Gizmos.color = Color.green;
-                            //Gizmos.DrawCube(transform.position + new Vector3(x, y, z), Vector3.one);
-                        }
-                        if (open.Contains(worldScanner.gridOfObstacles[x, y, z]) || nextOpen.Contains(worldScanner.gridOfObstacles[x, y, z]))
-                        {
-                            Gizmos.color = new Color(1f, 0.9215686f, 0.01568628f, 0.5f);
-                        }
-                        if (closed.Contains(worldScanner.gridOfObstacles[x, y, z]))
-                        {
-                            Gizmos.color = Color.grey;
-                        }
-                        Gizmos.DrawCube(new Vector3(x, y, z), Vector3.one);
                     }
                 }
             }
         }
     }
-
 }

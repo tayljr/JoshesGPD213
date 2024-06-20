@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1472766629501093307}
   - component: {fileID: 3713855584696846582}
   - component: {fileID: 3321955974855276222}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Baddie
   m_TagString: Untagged
   m_Icon: {fileID: 0}

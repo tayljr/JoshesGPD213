@@ -5,6 +5,7 @@ using UnityEngine;
 public class WorldScanner : MonoBehaviour
 {
     public Vector3Int size;
+    public Vector3 nodeSize = new Vector3(1, 1, 1);
     public Node[,,] gridOfObstacles;
     public LayerMask layerMask;
     public bool scan2D = false;
@@ -71,7 +72,7 @@ public class WorldScanner : MonoBehaviour
         {
             sizeY = size.y;
         }
-        gridOfObstacles = new Node[size.x, size.y, size.z];
+        gridOfObstacles = new Node[size.x, sizeY, size.z];
         for (int x = 0; x < size.x; x++)
         {
             for (int z = 0; z < size.z; z++)
@@ -80,7 +81,7 @@ public class WorldScanner : MonoBehaviour
                 {
                     gridOfObstacles[x, y, z] = new Node();
                     gridOfObstacles[x, y, z].pos = new Vector3Int(x, y, z);
-                    if (Physics.CheckBox(transform.position + new Vector3(x, y, z), new Vector3(0.5f, 0.5f, 0.5f), Quaternion.identity,
+                    if (Physics.CheckBox(transform.position + new Vector3(x * nodeSize.x / 2, y * nodeSize.y / 2, z * nodeSize.z / 2), new Vector3(0.5f * nodeSize.x, 0.5f * nodeSize.y, 0.5f * nodeSize.z), Quaternion.identity,
                             layerMask))
                     {
                         // Something is there
