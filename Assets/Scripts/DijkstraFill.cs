@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class DijkstraFill : SerializedMonoBehaviour
@@ -9,6 +10,8 @@ public class DijkstraFill : SerializedMonoBehaviour
     public List<Node> open;
     public List<Node> closed;
     public WorldScanner worldScanner;
+    private List<Node> wasOpen = new List<Node>();
+    private List<Node> nextOpen = new List<Node>();
     
     // Start is called before the first frame update
     void Start()
@@ -32,11 +35,12 @@ public class DijkstraFill : SerializedMonoBehaviour
         {
             foreach (Node node in open)
             {
+                currentPos = node.pos;
                 if(!closed.Contains(node))
                 {
                     closed.Add(node);
                 }
-                open.Remove(node);
+                wasOpen.Add(node);
 
                 for(int x = -1; x < 2; x++)
                 {
@@ -46,9 +50,6 @@ public class DijkstraFill : SerializedMonoBehaviour
                         {
                             //check to see the node exists please :)
                             Vector3Int nextPos = new Vector3Int(currentPos.x + x , currentPos.y + y, currentPos.z + z);
-                            Debug.Log(worldScanner.gridOfObstacles.GetLength(0));
-                            Debug.Log(worldScanner.gridOfObstacles.GetLength(1));
-                            Debug.Log(worldScanner.gridOfObstacles.GetLength(2));
                             if(nextPos.x < 0 || nextPos.y < 0 || nextPos.z < 0 || nextPos.x >= worldScanner.size.x || nextPos.y >= worldScanner.sizeY || nextPos.z >= worldScanner.size.z)
                             {
                                 continue;
@@ -60,12 +61,23 @@ public class DijkstraFill : SerializedMonoBehaviour
                             }
                             if (!nextWorldNode.isBlocked)
                             {
-                                open.Add(nextWorldNode);
+                                nextOpen.Add(nextWorldNode);
                             }
                         }
                     }
                 }
             }
+
+            foreach (Node node in wasOpen)
+            {
+                open.Remove(node);
+            }
+            wasOpen.Clear();
+            foreach (Node node in nextOpen)
+            {
+                open.Add(node);
+            }
+            nextOpen.Clear();
         }
     }
 }

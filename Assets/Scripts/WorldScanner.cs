@@ -79,6 +79,7 @@ public class WorldScanner : MonoBehaviour
                 for (int y = 0; y < sizeY; y++)
                 {
                     gridOfObstacles[x, y, z] = new Node();
+                    gridOfObstacles[x, y, z].pos = new Vector3Int(x, y, z);
                     if (Physics.CheckBox(transform.position + new Vector3(x, y, z), new Vector3(0.5f, 0.5f, 0.5f), Quaternion.identity,
                             layerMask))
                     {
