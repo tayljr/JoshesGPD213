@@ -3,15 +3,20 @@ using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class DijkstraFill : SerializedMonoBehaviour
 {
     public Vector3Int startPos = new Vector3Int(0, 0, 0);
+    [FormerlySerializedAs("showScan")] public bool randomFlow = false;
+    public float loopSpeed = 0.000001f;
+    public int loopNumber = 10;
     public List<Node> open;
     public List<Node> closed;
     public WorldScanner worldScanner;
     private List<Node> wasOpen = new List<Node>();
     private List<Node> nextOpen = new List<Node>();
+    private Node node;
     
     // Start is called before the first frame update
     void Start()
@@ -35,42 +40,33 @@ public class DijkstraFill : SerializedMonoBehaviour
         //todo need to change current pos to get pos from node ... i think + inside while loop
         //done
         open.Add(worldScanner.gridOfObstacles[currentPos.x, currentPos.y, currentPos.z]);
+        int currentLoop = 0;
         while (open.Count > 0)
         {
-            yield return new WaitForSeconds(0.000001f);
-            foreach (Node node in open)
+            if(randomFlow)
             {
-                currentPos = node.pos;
-                if(!closed.Contains(node))
+                if (currentLoop >= loopNumber)
                 {
-                    closed.Add(node);
+                    yield return new WaitForSeconds(loopSpeed);
+                    currentLoop = 0;
                 }
-                wasOpen.Add(node);
-
-                for(int x = -1; x < 2; x++)
+                currentLoop++;
+                node = open[Random.Range(0, open.Count)];
                 {
-                    for (int z = -1; z < 2; z++)
+                    Fill(currentPos, node);
+                }
+            }
+            else
+            {
+                foreach (Node node in open)
+                {
+                    if (currentLoop >= loopNumber)
                     {
-                        for (int y = -1; y < 2; y++)
-                        {
-                            //check to see the node exists please :)
-                            //done
-                            Vector3Int nextPos = new Vector3Int(currentPos.x + x , currentPos.y + y, currentPos.z + z);
-                            if(nextPos.x < 0 || nextPos.y < 0 || nextPos.z < 0 || nextPos.x >= worldScanner.size.x || nextPos.y >= worldScanner.sizeY || nextPos.z >= worldScanner.size.z)
-                            {
-                                continue;
-                            }
-                            Node nextWorldNode = worldScanner.gridOfObstacles[nextPos.x, nextPos.y, nextPos.z];
-                            if (closed.Contains(nextWorldNode) || open.Contains(nextWorldNode) || wasOpen.Contains(nextWorldNode) || nextOpen.Contains(nextWorldNode))
-                            {
-                                continue;
-                            }
-                            if (!nextWorldNode.isBlocked)
-                            {
-                                nextOpen.Add(nextWorldNode);
-                            }
-                        }
+                        yield return new WaitForSeconds(loopSpeed);
+                        currentLoop = 0;
                     }
+                    currentLoop++;
+                    Fill(currentPos, node);
                 }
             }
 
@@ -84,6 +80,42 @@ public class DijkstraFill : SerializedMonoBehaviour
                 open.Add(node);
             }
             nextOpen.Clear();
+        }
+    }
+
+    private void Fill(Vector3Int currentPos, Node node)
+    {
+        currentPos = node.pos;
+        if(!closed.Contains(node))
+        {
+            closed.Add(node);
+        }
+        wasOpen.Add(node);
+
+        for(int x = -1; x < 2; x++)
+        {
+            for (int z = -1; z < 2; z++)
+            {
+                for (int y = -1; y < 2; y++)
+                {
+                    //check to see the node exists please :)
+                    //done
+                    Vector3Int nextPos = new Vector3Int(currentPos.x + x , currentPos.y + y, currentPos.z + z);
+                    if(nextPos.x < 0 || nextPos.y < 0 || nextPos.z < 0 || nextPos.x >= worldScanner.size.x || nextPos.y >= worldScanner.sizeY || nextPos.z >= worldScanner.size.z)
+                    {
+                        continue;
+                    }
+                    Node nextWorldNode = worldScanner.gridOfObstacles[nextPos.x, nextPos.y, nextPos.z];
+                    if (closed.Contains(nextWorldNode) || open.Contains(nextWorldNode) || wasOpen.Contains(nextWorldNode) || nextOpen.Contains(nextWorldNode))
+                    {
+                        continue;
+                    }
+                    if (!nextWorldNode.isBlocked)
+                    {
+                        nextOpen.Add(nextWorldNode);
+                    }
+                }
+            }
         }
     }
     private void OnDrawGizmos()

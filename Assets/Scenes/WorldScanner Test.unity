@@ -157,9 +157,10 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 55
-  scan2D: 0
+  scan2D: 1
+  sizeY: 1
   debug: 0
-  showUnblocked: 0
+  showUnblocked: 1
   showBlocked: 1
 --- !u!4 &459441683
 Transform:
@@ -198,6 +199,9 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   startPos: {x: 0, y: 0, z: 0}
+  randomFlow: 1
+  loopSpeed: 0.1
+  loopNumber: 10
   open: []
   closed: []
   worldScanner: {fileID: 459441682}
@@ -499,7 +503,7 @@ Transform:
   m_GameObject: {fileID: 924891817}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.3366182, z: -0, w: 0.9416412}
-  m_LocalPosition: {x: 3.4, y: 0, z: 3.95}
+  m_LocalPosition: {x: 3.88, y: 0, z: 8.66}
   m_LocalScale: {x: 2.4040163, y: 5.9747, z: 7.7911}
   m_ConstrainProportionsScale: 0
   m_Children: []
