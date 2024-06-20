@@ -37,28 +37,28 @@ public class WorldScanner : MonoBehaviour
         {
             sizeY = size.y;
         }
-        for (int x = 0; x < size.x; x++)
-        {
-            for (int z = 0; z < size.z; z++)
-            {
-                for (int y = 0; y < sizeY; y++)
-                {
-                    if(gridOfObstacles != null)
-                    {
-                        if (gridOfObstacles[x, y, z].isBlocked && showBlocked)
-                        {
-                            Gizmos.color = Color.red;
-                            Gizmos.DrawCube(transform.position + new Vector3(x, y, z), Vector3.one);
-                        }
-                        else if (showUnblocked)
-                        {
-                            Gizmos.color = Color.green;
-                            Gizmos.DrawCube(transform.position + new Vector3(x, y, z), Vector3.one);
-                        }
-                    }
-                }
-            }
-        }
+        // for (int x = 0; x < size.x; x++)
+        // {
+        //     for (int z = 0; z < size.z; z++)
+        //     {
+        //         for (int y = 0; y < sizeY; y++)
+        //         {
+        //             if(gridOfObstacles != null)
+        //             {
+        //                 if (gridOfObstacles[x, y, z].isBlocked && showBlocked)
+        //                 {
+        //                     Gizmos.color = Color.red;
+        //                     Gizmos.DrawCube(transform.position + new Vector3(x, y, z), Vector3.one);
+        //                 }
+        //                 else if (showUnblocked)
+        //                 {
+        //                     Gizmos.color = Color.green;
+        //                     Gizmos.DrawCube(transform.position + new Vector3(x, y, z), Vector3.one);
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
     }
 
     public void ScanWorld()
