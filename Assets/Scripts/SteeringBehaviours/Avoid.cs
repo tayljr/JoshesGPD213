@@ -35,7 +35,7 @@ public class Avoid : MonoBehaviour
                 Vector3 reflection = Vector3.Reflect(direction, hit.normal);
                 Debug.DrawRay(hit.point,reflection * (maxDistance - hit.distance), rayGradient.Evaluate(hit.distance/maxDistance)); 
                 averageDistance += hit.distance;
-                reflectionAverage += reflection * (maxDistance - hit.distance);
+                reflectionAverage += reflection;
                 
                 // Vector3 localReflection = transform.InverseTransformDirection(reflection);
                 // Vector3 angle = Quaternion.Euler(localReflection) * Vector3.back;
@@ -48,19 +48,24 @@ public class Avoid : MonoBehaviour
         if (hitRays > 0)
         {
             reflectionAverage /= hitRays;
+            reflectionAverage = reflectionAverage.normalized;
             averageDistance /= hitRays;
-            Debug.DrawRay(transform.position, reflectionAverage, Color.red);
+            averageDistance = maxDistance - averageDistance;
+            Debug.DrawRay(transform.position, reflectionAverage * averageDistance, Color.red);
+            averageDistance /= maxDistance;
+            //averageDistance = Mathf.InverseLerp(0, maxDistance, averageDistance);
             Vector3 localReflection = transform.InverseTransformDirection(reflectionAverage);
             //todo why shake!!!
-            turnAmount = Vector3.SignedAngle(transform.forward, reflectionAverage, Vector3.up);
+            //turnAmount += Vector3.SignedAngle(transform.forward, reflectionAverage, Vector3.up);
             // Vector3 angle = Vector3.zero;
-            // if (localReflection != Vector3.zero)
-            // {
-            //     angle = Quaternion.Euler(localReflection) * Vector3.back;
-            // }
+            float angle = Vector3.Angle(transform.forward, reflectionAverage);
+            if (reflectionAverage != Vector3.zero)
+            {
+            }
 
             //todo make turning more better
-            //turnAmount += (1 - averageDistance / maxDistance) * angle.normalized.y;
+            Debug.Log(averageDistance);
+            turnAmount += angle * averageDistance;
 
             // turnAmount += angle.y;
             // Debug.Log(turnAmount);

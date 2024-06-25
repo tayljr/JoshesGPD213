@@ -2591,7 +2591,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxAngle: 100
   rays: 10
-  turnSpeed: 20
+  turnSpeed: 0.01
   turnAmount: 0
   maxDistance: 50
   rayGradient:
