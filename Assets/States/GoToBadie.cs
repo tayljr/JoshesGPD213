@@ -7,6 +7,7 @@ public class GoToBadie : AntAIState
 {
     public Memory memory;
     public TurnTowards turnTowards;
+    public NavMeshPather pathfinder;
     private AISensor aiSensor;
     public GameObject mainObject;
 
@@ -55,7 +56,11 @@ public class GoToBadie : AntAIState
         base.Execute(aDeltaTime, aTimeScale);
         if (memory.memoryDic.ContainsKey(BadieObject))
         {
-            turnTowards.NewTarget(memory.memoryDic[BadieObject]);
+            if(pathfinder == null)
+            {
+                pathfinder = gameObject.GetComponentInParent<NavMeshPather>();
+            }
+            pathfinder.NewTarget(memory.memoryDic[BadieObject]);
         }
     }
 

@@ -1,15 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Avoid : MonoBehaviour
 {
     public float maxAngle = 100;
     public int rays = 10;
     public float turnSpeed = 1f;
-    public float turnAmount = 0f;
+    private float angle = 0f;
     public float maxDistance = 50f;
     public Gradient rayGradient;
+
+    public float maxBreak = 30f;
     // Start is called before the first frame update
     void Start()
     {
@@ -56,7 +59,7 @@ public class Avoid : MonoBehaviour
             //averageDistance = Mathf.InverseLerp(0, maxDistance, averageDistance);
             Vector3 localReflection = transform.InverseTransformDirection(reflectionAverage);
             //todo why shake!!!
-            //turnAmount += Vector3.SignedAngle(transform.forward, reflectionAverage, Vector3.up);
+            //angle += Vector3.SignedAngle(transform.forward, reflectionAverage, Vector3.up);
             // Vector3 angle = Vector3.zero;
             float angle = Vector3.Angle(transform.forward, reflectionAverage);
             if (reflectionAverage != Vector3.zero)
@@ -65,10 +68,10 @@ public class Avoid : MonoBehaviour
 
             //todo make turning more better
             Debug.Log(averageDistance);
-            turnAmount += angle * averageDistance;
+            this.angle += angle * averageDistance;
 
-            // turnAmount += angle.y;
-            // Debug.Log(turnAmount);
+            // angle += angle.y;
+            // Debug.Log(angle);
         }
         //gameObject.GetComponent<Rigidbody>().AddRelativeTorque(0, angle.y * turnSpeed, 0);
         //gameObject.GetComponent<Rigidbody>().AddRelativeTorque(localReflection);
@@ -81,7 +84,7 @@ public class Avoid : MonoBehaviour
         // if (hitLeft.transform != null)
         // {
         //     //Debug.Log("left: " + hitLeft.distance);
-        //     turnAmount = turnAmount + (1 - hitLeft.distance / maxDistance);
+        //     angle = angle + (1 - hitLeft.distance / maxDistance);
         //     Debug.DrawRay(transform.position, left * maxDistance, rayGradient.Evaluate(hitLeft.distance/maxDistance));
         // }
         // Vector3 right = Quaternion.Euler(0, 25, 0) * transform.forward;
@@ -90,7 +93,7 @@ public class Avoid : MonoBehaviour
         // if (hitRight.transform != null)
         // {
         //     //Debug.Log("right: " + hitRight.distance);
-        //     turnAmount = turnAmount - (1 - hitRight.distance / maxDistance);
+        //     angle = angle - (1 - hitRight.distance / maxDistance);
         //     Debug.DrawRay(transform.position, right * maxDistance, rayGradient.Evaluate(hitRight.distance/maxDistance));
         // }
 
@@ -99,12 +102,13 @@ public class Avoid : MonoBehaviour
         
         if (Physics.Raycast(transform.position, transform.forward, out hitForward, 5))
         {
-            turnAmount = 1 - hitForward.distance/5;
+            angle = 1 - hitForward.distance/5;
             Debug.DrawRay(transform.position, transform.forward * 5f, rayGradient.Evaluate(hitForward.distance/5));
         }
         
-        gameObject.GetComponent<Rigidbody>().AddRelativeTorque(0, turnAmount * turnSpeed, 0);
-        //Debug.Log(turnAmount);
-        turnAmount = 0;
+        gameObject.GetComponent<Rigidbody>().AddRelativeTorque(0, angle * turnSpeed, 0);
+        gameObject.GetComponent<Rigidbody>().AddRelativeForce(Vector3.back * (maxBreak * averageDistance));
+        //Debug.Log(angle);
+        angle = 0;
     }
 }
