@@ -1594,7 +1594,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.33333334
+  m_VoxelSize: 0.5
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 6b3a51bf920d8524297e108dba48d5a0, type: 2}
   m_BuildHeightMesh: 0
@@ -2316,7 +2316,7 @@ GameObject:
   - component: {fileID: 1537602782}
   - component: {fileID: 1537602786}
   - component: {fileID: 1537602785}
-  - component: {fileID: 1537602794}
+  - component: {fileID: 1537602795}
   - component: {fileID: 1537602787}
   - component: {fileID: 1537602793}
   - component: {fileID: 1537602792}
@@ -2324,7 +2324,6 @@ GameObject:
   - component: {fileID: 1537602789}
   - component: {fileID: 1537602790}
   - component: {fileID: 1537602791}
-  - component: {fileID: 1537602795}
   m_Layer: 3
   m_Name: AI
   m_TagString: Untagged
@@ -2412,7 +2411,7 @@ Transform:
   m_GameObject: {fileID: 1537602777}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.04840621, z: -0, w: 0.99882776}
-  m_LocalPosition: {x: -101.1, y: 0.5, z: 27.1}
+  m_LocalPosition: {x: -24.5, y: 0.5, z: -26.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2709,7 +2708,7 @@ MonoBehaviour:
   emergancyDistance: 5
   emergencyTurn: 80
   maxSlow: 50
---- !u!114 &1537602794
+--- !u!114 &1537602795
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2732,31 +2731,8 @@ MonoBehaviour:
     SerializationNodes: []
   target: {fileID: 0}
   targetPoint: {x: 0, y: 0, z: 0}
-  turnTowards: {fileID: 0}
---- !u!114 &1537602795
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1537602777}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1a05d2e86f50154c9bf3fdc8cdbcd31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
-    ReferencedUnityObjects: []
-    SerializedBytesString: 
-    Prefab: {fileID: 0}
-    PrefabModificationsReferencedUnityObjects: []
-    PrefabModifications: []
-    SerializationNodes: []
-  target: {fileID: 599196239}
-  targetPoint: {x: 0, y: 0, z: 0}
-  turnTowards: {fileID: 0}
+  targetPath: []
+  turnTowards: {fileID: 1537602788}
 --- !u!1 &1580343364
 GameObject:
   m_ObjectHideFlags: 0
@@ -3012,7 +2988,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5181299922690907342, guid: 2ea62ebe2bbcb934090acb2d3e60bf95, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 65.8
+      value: -26.5
       objectReference: {fileID: 0}
     - target: {fileID: 5181299922690907342, guid: 2ea62ebe2bbcb934090acb2d3e60bf95, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3020,7 +2996,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5181299922690907342, guid: 2ea62ebe2bbcb934090acb2d3e60bf95, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 62.8
+      value: 12.1
       objectReference: {fileID: 0}
     - target: {fileID: 5181299922690907342, guid: 2ea62ebe2bbcb934090acb2d3e60bf95, type: 3}
       propertyPath: m_LocalRotation.w
