@@ -17,7 +17,11 @@ public class NavMeshPather : SerializedMonoBehaviour
     public TurnTowards turnTowards;
     private int currentCorner = 0;
 
+    public delegate void SimpleEvent();
 
+    public event SimpleEvent OnPathFinish;
+    
+    
     private void Start()
     {
         NewPath();
@@ -51,7 +55,7 @@ public class NavMeshPather : SerializedMonoBehaviour
                 if (currentCorner >= path.corners.Length)
                 {
                     currentCorner = 0;
-
+                    OnPathFinish?.Invoke();
                     //cos it is cool 
                 }
             }
