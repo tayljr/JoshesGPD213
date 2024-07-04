@@ -25,7 +25,7 @@ public class BasicAvoid : MonoBehaviour
     void FixedUpdate()
     {
         float currentAngle = -maxAngle / 2f;
-        float averageDistance = 0f;
+        //float averageDistance = 0f;
         Vector3 reflectionAverage = Vector3.zero;
         int hitRays = 0;
         for (int i = 0; i < rays; i++)

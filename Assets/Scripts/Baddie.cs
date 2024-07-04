@@ -6,30 +6,36 @@ using Random = UnityEngine.Random;
 
 public class Baddie : MonoBehaviour
 {
-    public NavMeshPather pather;
-    public Vector3[] goodLocations;
-    
+    public NavMeshPather[] pathers;
+    public SpawnPoint[] goodLocations;
+
     // Start is called before the first frame update
     public void OnEnable()
     {
-        if (pather == null)
+        pathers = new []{FindObjectOfType<NavMeshPather>()};
+        foreach (NavMeshPather pather in pathers)
         {
-            pather = FindObjectOfType<NavMeshPather>();
+
+            pather.OnPathFinish += OnOnPathFinish;
         }
-        pather.OnPathFinish += OnOnPathFinish;
     }
 
     public void OnDisable()
     {
-        pather.OnPathFinish -= OnOnPathFinish;
+        foreach (NavMeshPather pather in pathers)
+        {
+
+            pather.OnPathFinish -= OnOnPathFinish;
+        }
     }
 
 
     private void OnOnPathFinish()
     {
+        goodLocations = FindObjectsOfType<SpawnPoint>();
         if (goodLocations.Length > 0)
         {
-            transform.position = goodLocations[Random.Range(0, goodLocations.Length)];
+            transform.position = goodLocations[Random.Range(0, goodLocations.Length)].transform.position;
         }
     }
 }
