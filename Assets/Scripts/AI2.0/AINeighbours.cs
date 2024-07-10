@@ -8,7 +8,7 @@ public class AINeighbours : MonoBehaviour
 {
     public float neighbourDistance = 5f;
 
-    public Collider[] neighbours;
+    public List<GameObject> neighbours;
 
     public int numNeighbours = 0;
     // Start is called before the first frame update
@@ -21,8 +21,13 @@ public class AINeighbours : MonoBehaviour
     void Update()
     {
         //layermask being wierd
-        neighbours = Physics.OverlapSphere(transform.position, neighbourDistance, LayerMask.NameToLayer("AI"));
-        foreach (Collider neighbour in neighbours)
+        Collider[] neighbourColliders = Physics.OverlapSphere(transform.position, neighbourDistance, 1<<6);
+        neighbours.Clear();
+        foreach (Collider neighbourCollider in neighbourColliders)
+        {
+            neighbours.Add(neighbourCollider.gameObject);
+        }
+        foreach (GameObject neighbour in neighbours)
         {
             Debug.DrawLine(transform.position, neighbour.transform.position, Color.blue);
         }

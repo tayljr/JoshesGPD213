@@ -250,6 +250,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   neighbourDistance: 5
   neighbours: []
+  numNeighbours: 0
 --- !u!114 &2869677151626918772
 MonoBehaviour:
   m_ObjectHideFlags: 0
