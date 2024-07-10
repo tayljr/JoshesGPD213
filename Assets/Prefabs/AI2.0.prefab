@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7261101643971220721}
   - component: {fileID: 5188480916327225806}
   - component: {fileID: 1584327330888923202}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: View
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,11 +96,12 @@ GameObject:
   - component: {fileID: 1446508411701897729}
   - component: {fileID: 6412545545367489431}
   - component: {fileID: 4973763959457331835}
+  - component: {fileID: 5962209191633246675}
+  - component: {fileID: 4708138974593786464}
   - component: {fileID: 2869677151626918772}
   - component: {fileID: 4424980491207351931}
-  - component: {fileID: 5962209191633246675}
   - component: {fileID: 6290524480375993211}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AI2.0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -216,7 +217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementManager: {fileID: 6412545545367489431}
---- !u!114 &2869677151626918772
+--- !u!114 &5962209191633246675
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -224,6 +225,39 @@ MonoBehaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9093402400038944402}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55a06a3bea08e9646a0ecfbc760bb418, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementManager: {fileID: 6412545545367489431}
+  maxAngle: 100
+  rays: 4
+  maxDistance: 8
+  emergancyDistance: 3.5
+  emergencyTurn: 1
+  maxSlow: 40
+--- !u!114 &4708138974593786464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9093402400038944402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa4fbc5dfab37d44a865346812377988, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  neighbourDistance: 5
+  neighbours: []
+--- !u!114 &2869677151626918772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9093402400038944402}
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71b7a4c4b6d5f1d4a9d069a2d31f8cea, type: 3}
   m_Name: 
@@ -244,25 +278,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementManager: {fileID: 6412545545367489431}
---- !u!114 &5962209191633246675
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9093402400038944402}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55a06a3bea08e9646a0ecfbc760bb418, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movementManager: {fileID: 6412545545367489431}
-  maxAngle: 100
-  rays: 4
-  maxDistance: 8
-  emergancyDistance: 3.5
-  emergencyTurn: 1
-  maxSlow: 40
 --- !u!114 &6290524480375993211
 MonoBehaviour:
   m_ObjectHideFlags: 0
