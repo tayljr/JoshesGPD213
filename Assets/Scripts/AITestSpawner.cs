@@ -23,7 +23,8 @@ public class AITestSpawner : MonoBehaviour
             GameObject newAi = Instantiate(aiPrefab, spawns[Random.Range(0, spawns.Length)].transform);
             if (target != null)
             {
-                newAi.GetComponent<NavMeshPather>().target = target;
+                //newAi.GetComponent<NavMeshPather>().target = target;
+                newAi.GetComponent<AITurnTowards>().target = target;
             }
         }
     }

@@ -86,7 +86,7 @@ public class AIAvoid : MonoBehaviour, IAIBehaviour
 
         if(hitRays > 0 )
         {
-            averageDisance = (maxDistance - totalDistance / hitRays) / maxDistance;
+            averageDisance = ((maxDistance - totalDistance / hitRays) / maxDistance);
         }
         else
         {
@@ -119,20 +119,24 @@ public class AIAvoid : MonoBehaviour, IAIBehaviour
         int pointsNeeded = CalculatePointsNeeded();
         Debug.Log("avoid " + pointsNeeded);
         
-        if (points >= pointsNeeded)
+        
+        if (pointsNeeded > 0)
         {
-            //Debug.Log(lastAngle);
-            movementManager.AddTurn(lastAngle * movementManager.maxTurn);
-            movementManager.AddSpeed(-maxSlow * averageDisance);
-            points -= pointsNeeded;
-        }
-        else
-        {
-            float multiplier = points / pointsNeeded;
+            if (points >= pointsNeeded)
+            {
+                //Debug.Log(lastAngle);
+                movementManager.AddTurn(lastAngle * movementManager.maxTurn);
+                movementManager.AddSpeed(-maxSlow * averageDisance);
+                points = 0;
+            }
+            else
+            {
+                float multiplier = points / pointsNeeded;
 
-            movementManager.AddTurn(lastAngle * movementManager.maxTurn * multiplier);
-            movementManager.AddSpeed(-maxSlow * averageDisance * multiplier);
-            points = 0;
+                movementManager.AddTurn(lastAngle * movementManager.maxTurn * multiplier);
+                movementManager.AddSpeed(-maxSlow * averageDisance * multiplier);
+                points = 0;
+            }
         }
         // if (points >= pointsNeeded)
         // {
@@ -148,5 +152,6 @@ public class AIAvoid : MonoBehaviour, IAIBehaviour
     {
         // Debug.Log("cal" + lastAngle);
         return Mathf.RoundToInt(Mathf.Abs(lastAngle * 5) + averageDisance * 3);
+        return Mathf.RoundToInt(Mathf.Abs(lastAngle * 5));
     }
 }
