@@ -47,7 +47,7 @@ public class AITurnTowards : MonoBehaviour, IAIBehaviour
         targetPos = newTarget;
     }
 
-    public int Priority => 2;
+    public int Priority => (int)behaviourEnum.turnTowards;
 
     public void Execute(ref int points)
     {
@@ -62,7 +62,7 @@ public class AITurnTowards : MonoBehaviour, IAIBehaviour
         }
 
         int pointsNeeded = CalculatePointsNeeded();
-        Debug.Log("Turn " + pointsNeeded);
+        //Debug.Log("Turn " + pointsNeeded);
 
         if (points >= pointsNeeded)
         {

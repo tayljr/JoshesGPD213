@@ -25,7 +25,7 @@ public class AIWander : MonoBehaviour, IAIBehaviour
         angle = Mathf.PerlinNoise1D(randomOffset + Time.time) * 2 - 1;
     }
 
-    public int Priority => 1;
+    public int Priority => (int)behaviourEnum.wander;
     
     public void Execute(ref int points)
     {
@@ -39,7 +39,7 @@ public class AIWander : MonoBehaviour, IAIBehaviour
         }
 
         int pointsNeeded = CalculatePointsNeeded();
-        Debug.Log("Wander " + pointsNeeded);
+        //Debug.Log("Wander " + pointsNeeded);
 
         if (points >= pointsNeeded)
         {

@@ -102,7 +102,7 @@ public class AIAvoid : MonoBehaviour, IAIBehaviour
         angle = 0;
     }
 
-    public int Priority => 3;
+    public int Priority => (int)behaviourEnum.avoid;
 
     public void Execute(ref int points)
     {
@@ -117,7 +117,7 @@ public class AIAvoid : MonoBehaviour, IAIBehaviour
         }
 
         int pointsNeeded = CalculatePointsNeeded();
-        Debug.Log("avoid " + pointsNeeded);
+        //Debug.Log("avoid " + pointsNeeded);
         
         
         if (pointsNeeded > 0)
@@ -127,7 +127,11 @@ public class AIAvoid : MonoBehaviour, IAIBehaviour
                 //Debug.Log(lastAngle);
                 movementManager.AddTurn(lastAngle * movementManager.maxTurn);
                 movementManager.AddSpeed(-maxSlow * averageDisance);
-                points = 0;
+                points -= pointsNeeded;
+                if (totalHit == rays)
+                {
+                    points = 0;
+                }
             }
             else
             {
@@ -151,7 +155,7 @@ public class AIAvoid : MonoBehaviour, IAIBehaviour
     private int CalculatePointsNeeded()
     {
         // Debug.Log("cal" + lastAngle);
-        return Mathf.RoundToInt(Mathf.Abs(lastAngle * 5) + averageDisance * 3);
+        return Mathf.RoundToInt(Mathf.Abs(lastAngle * 5) + averageDisance * 3 + totalHit / rays);
         return Mathf.RoundToInt(Mathf.Abs(lastAngle * 5));
     }
 }

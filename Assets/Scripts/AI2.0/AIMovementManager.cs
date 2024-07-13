@@ -4,9 +4,21 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Serialization;
 
+public enum behaviourEnum
+{
+    moveForward,
+    avoid,
+    neighbourCheck,
+    seperation,
+    alignment,
+    cohesion,
+    turnTowards,
+    wander,
+}
+
 public class AIMovementManager : SerializedMonoBehaviour
 {
-    public int TotalTurn = 10;
+    public int totalPoints = 10;
     public List<IAIBehaviour> behaviours;
     public float maxSpeed = 30f;
     public float maxTurn = 1f;
@@ -16,17 +28,19 @@ public class AIMovementManager : SerializedMonoBehaviour
     public float desiredTurn = 0f;
 
     public int remainingPoints;
+
+    public List<GameObject> myNeighbours;
     // Start is called before the first frame update
     void Start()
     {
         behaviours = new List<IAIBehaviour>(GetComponents<IAIBehaviour>());
-        behaviours.Sort((a, b) => b.Priority.CompareTo(a.Priority));
+        behaviours.Sort((a, b) => a.Priority.CompareTo(b.Priority));
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        remainingPoints = TotalTurn;
+        remainingPoints = totalPoints;
         desiredSpeed = 0;
         desiredTurn = 0;
 
@@ -77,5 +91,10 @@ public class AIMovementManager : SerializedMonoBehaviour
     public void SetSpeed(float amount)
     {
         desiredSpeed = amount;
+    }
+
+    public void SetNeighbours(List<GameObject> newNeighbours)
+    {
+        myNeighbours = newNeighbours;
     }
 }

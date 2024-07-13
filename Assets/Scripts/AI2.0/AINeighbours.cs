@@ -4,32 +4,54 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AINeighbours : MonoBehaviour
+public class AINeighbours : MonoBehaviour, IAIBehaviour
 {
+    public AIMovementManager movementManager;
+    
     public float neighbourDistance = 5f;
 
     public List<GameObject> neighbours;
-
-    public int numNeighbours = 0;
-    // Start is called before the first frame update
+    
     void Start()
     {
-        
+        if (movementManager == null)
+        {
+            movementManager = GetComponentInParent<AIMovementManager>();
+        }
     }
+
 
     // Update is called once per frame
     void Update()
     {
-        //layermask being wierd
-        Collider[] neighbourColliders = Physics.OverlapSphere(transform.position, neighbourDistance, 1<<6);
+        Collider[] neighbourColliders = Physics.OverlapSphere(transform.position, neighbourDistance, LayerMask.GetMask("AI"));
         neighbours.Clear();
         foreach (Collider neighbourCollider in neighbourColliders)
         {
-            neighbours.Add(neighbourCollider.gameObject);
+            if (neighbourCollider.gameObject == gameObject)
+            {
+                continue;
+            }
+            // Debug.DrawLine(transform.position, neighbour.transform.position, Color.blue);
+            Vector3 dir = neighbourCollider.transform.position - transform.position;
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, dir.normalized, out hit, dir.magnitude, ~LayerMask.GetMask("AI")))
+            {
+                //Debug.Log(hit.transform.gameObject.layer);
+                Debug.DrawRay(transform.position, dir, Color.magenta);
+            }
+            else
+            {
+                neighbours.Add(neighbourCollider.gameObject);
+                Debug.DrawRay(transform.position, dir, Color.blue);
+            }
         }
-        foreach (GameObject neighbour in neighbours)
-        {
-            Debug.DrawLine(transform.position, neighbour.transform.position, Color.blue);
-        }
+        
+    }
+
+    public int Priority => (int)behaviourEnum.neighbourCheck;
+    public void Execute(ref int points)
+    {
+        movementManager.SetNeighbours(neighbours);
     }
 }

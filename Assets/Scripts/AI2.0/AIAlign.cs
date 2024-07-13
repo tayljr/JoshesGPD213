@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AISeperation : MonoBehaviour, IAIBehaviour
+public class AIAlign : MonoBehaviour, IAIBehaviour
 {
     public AIMovementManager movementManager;
-    
+
     public Vector3 cross;
     // Start is called before the first frame update
     void Start()
@@ -21,7 +21,9 @@ public class AISeperation : MonoBehaviour, IAIBehaviour
     {
         Vector3 targetDir = CalculateDir(movementManager.myNeighbours);
         
-        //see AIAlign.cs for more info
+        
+        //Cross will take YOUR direction and the TARGET direction and turn it into a rotation force vector
+        //todo attempt to implement vector3.cross into the advanced void
         cross = Vector3.Cross(transform.forward, targetDir);
     }
 
@@ -32,19 +34,20 @@ public class AISeperation : MonoBehaviour, IAIBehaviour
             return Vector3.zero;
         }
 
-        Vector3 SeperateDir = Vector3.zero;
+        Vector3 alignDir = Vector3.zero;
+
         foreach (GameObject neighbour in neighbours)
         {
-            SeperateDir += (transform.position - neighbour.transform.position).normalized;
+            alignDir += neighbour.transform.forward;
         }
 
-        SeperateDir /= neighbours.Count;
+        alignDir /= neighbours.Count;
 
-        return SeperateDir;
-
+        //Debug.Log(alignMove);
+        return alignDir;
     }
     
-    public int Priority => (int)behaviourEnum.seperation;
+    public int Priority => (int)behaviourEnum.alignment;
     public void Execute(ref int points)
     {
         if (!isActiveAndEnabled)
