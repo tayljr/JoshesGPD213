@@ -47,7 +47,7 @@ public class AIAlign : MonoBehaviour, IAIBehaviour
         return alignDir;
     }
     
-    public int Priority => (int)behaviourEnum.alignment;
+    public behaviourEnum Priority => behaviourEnum.alignment;
     public void Execute(ref int points)
     {
         if (!isActiveAndEnabled)

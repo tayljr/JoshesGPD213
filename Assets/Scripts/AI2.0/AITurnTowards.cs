@@ -47,7 +47,7 @@ public class AITurnTowards : MonoBehaviour, IAIBehaviour
         targetPos = newTarget;
     }
 
-    public int Priority => (int)behaviourEnum.turnTowards;
+    public behaviourEnum Priority => behaviourEnum.turnTowards;
 
     public void Execute(ref int points)
     {

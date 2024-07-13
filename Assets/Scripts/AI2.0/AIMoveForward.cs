@@ -19,7 +19,7 @@ public class AIMoveForward : MonoBehaviour, IAIBehaviour
     {
     }
 
-    public int Priority => (int)behaviourEnum.moveForward;
+    public behaviourEnum Priority => behaviourEnum.moveForward;
     public void Execute(ref int points)
     {
         movementManager.AddSpeed(movementManager.maxSpeed);

@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface IAIBehaviour
 {
-    int  Priority { get; }
+    behaviourEnum  Priority { get; }
     void Execute(ref int points);
 }

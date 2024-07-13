@@ -44,7 +44,7 @@ public class AISeperation : MonoBehaviour, IAIBehaviour
 
     }
     
-    public int Priority => (int)behaviourEnum.seperation;
+    public behaviourEnum Priority => behaviourEnum.seperation;
     public void Execute(ref int points)
     {
         if (!isActiveAndEnabled)

@@ -12,6 +12,7 @@ public enum behaviourEnum
     seperation,
     alignment,
     cohesion,
+    pather,
     turnTowards,
     wander,
 }

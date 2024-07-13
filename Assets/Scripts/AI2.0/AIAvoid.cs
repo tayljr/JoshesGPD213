@@ -102,7 +102,7 @@ public class AIAvoid : MonoBehaviour, IAIBehaviour
         angle = 0;
     }
 
-    public int Priority => (int)behaviourEnum.avoid;
+    public behaviourEnum Priority => behaviourEnum.avoid;
 
     public void Execute(ref int points)
     {

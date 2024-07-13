@@ -49,7 +49,7 @@ public class AINeighbours : MonoBehaviour, IAIBehaviour
         
     }
 
-    public int Priority => (int)behaviourEnum.neighbourCheck;
+    public behaviourEnum Priority => behaviourEnum.neighbourCheck;
     public void Execute(ref int points)
     {
         movementManager.SetNeighbours(neighbours);
