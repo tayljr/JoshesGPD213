@@ -153,7 +153,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2934be556f02a7f45b3917ec8ad1daa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  size: {x: 20, y: 10, z: 20}
+  size: {x: 5, y: 10, z: 5}
+  nodeSize: {x: 10, y: 10, z: 10}
   layerMask:
     serializedVersion: 2
     m_Bits: 55
@@ -171,7 +172,7 @@ Transform:
   m_GameObject: {fileID: 459441681}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -2.8, y: 0, z: -2.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -200,6 +201,7 @@ MonoBehaviour:
     SerializationNodes: []
   startPos: {x: 0, y: 0, z: 0}
   randomFlow: 1
+  instantScan: 0
   loopSpeed: 0.1
   loopNumber: 10
   open: []

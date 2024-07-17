@@ -50,7 +50,9 @@ public class AIMovementManager : SerializedMonoBehaviour
             behaviour.Execute(ref remainingPoints);
 
             if (remainingPoints <= 0)
+            {
                 break;
+            }
         }
         if (desiredSpeed > maxSpeed)
         {

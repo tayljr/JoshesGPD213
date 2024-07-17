@@ -5,12 +5,13 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class DijkstraFill : SerializedMonoBehaviour
+public class AStar : SerializedMonoBehaviour
 {
     public Vector3Int startPos = new Vector3Int(0, 0, 0);
-    [FormerlySerializedAs("showScan")] public bool randomFlow = false;
+    public bool instantScan = false;
     public float loopSpeed = 0.000001f;
     public int loopNumber = 10;
+    public bool showNodes = true;
     public List<Node> open;
     public List<Node> closed;
     public WorldScanner worldScanner;
@@ -43,31 +44,18 @@ public class DijkstraFill : SerializedMonoBehaviour
         int currentLoop = 0;
         while (open.Count > 0)
         {
-            if(randomFlow)
+            foreach (Node node in open)
             {
                 if (currentLoop >= loopNumber)
                 {
-                    yield return new WaitForSeconds(loopSpeed);
+                    if(!instantScan)
+                    {
+                        yield return new WaitForSeconds(loopSpeed);
+                    }
                     currentLoop = 0;
                 }
                 currentLoop++;
-                node = open[Random.Range(0, open.Count)];
-                {
-                    Fill(currentPos, node);
-                }
-            }
-            else
-            {
-                foreach (Node node in open)
-                {
-                    if (currentLoop >= loopNumber)
-                    {
-                        yield return new WaitForSeconds(loopSpeed);
-                        currentLoop = 0;
-                    }
-                    currentLoop++;
-                    Fill(currentPos, node);
-                }
+                Fill(currentPos, node);
             }
 
             foreach (Node node in wasOpen)
@@ -141,8 +129,7 @@ public class DijkstraFill : SerializedMonoBehaviour
                                 //Gizmos.DrawCube(transform.position + new Vector3(x, y, z), Vector3.one);
                             }
 
-                            if (open.Contains(worldScanner.gridOfObstacles[x, y, z]) ||
-                                nextOpen.Contains(worldScanner.gridOfObstacles[x, y, z]))
+                            if (open.Contains(worldScanner.gridOfObstacles[x, y, z]) || nextOpen.Contains(worldScanner.gridOfObstacles[x, y, z]))
                             {
                                 Gizmos.color = new Color(1f, 0.9215686f, 0.01568628f, 0.5f);
                             }
@@ -151,8 +138,10 @@ public class DijkstraFill : SerializedMonoBehaviour
                             {
                                 Gizmos.color = Color.grey;
                             }
-
-                            Gizmos.DrawCube(transform.position + new Vector3(x * worldScanner.nodeSize.x / 2, y * worldScanner.nodeSize.y / 2, z * worldScanner.nodeSize.z / 2), worldScanner.nodeSize);
+                            if(showNodes)
+                            {
+                                Gizmos.DrawCube(transform.position + new Vector3(x * worldScanner.nodeSize.x, y * worldScanner.nodeSize.y, z * worldScanner.nodeSize.z), worldScanner.nodeSize);
+                            }
                         }
                     }
                 }

@@ -81,8 +81,7 @@ public class WorldScanner : MonoBehaviour
                 {
                     gridOfObstacles[x, y, z] = new Node();
                     gridOfObstacles[x, y, z].pos = new Vector3Int(x, y, z);
-                    if (Physics.CheckBox(transform.position + new Vector3(x * nodeSize.x / 2, y * nodeSize.y / 2, z * nodeSize.z / 2), new Vector3(0.5f * nodeSize.x, 0.5f * nodeSize.y, 0.5f * nodeSize.z), Quaternion.identity,
-                            layerMask))
+                    if (Physics.CheckBox(transform.position + new Vector3(x * nodeSize.x, y * nodeSize.y, z * nodeSize.z), new Vector3(0.5f * nodeSize.x, 0.5f * nodeSize.y, 0.5f * nodeSize.z), Quaternion.identity, layerMask))
                     {
                         // Something is there
                         gridOfObstacles[x, y, z].isBlocked = true;
