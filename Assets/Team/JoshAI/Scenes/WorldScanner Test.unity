@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 459441683}
   - component: {fileID: 459441682}
+  - component: {fileID: 459441685}
   - component: {fileID: 459441684}
   m_Layer: 0
   m_Name: World Scanner
@@ -153,16 +154,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2934be556f02a7f45b3917ec8ad1daa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  size: {x: 5, y: 10, z: 5}
-  nodeSize: {x: 10, y: 10, z: 10}
+  size: {x: 13, y: 10, z: 13}
+  nodeSize: {x: 2, y: 2, z: 2}
   layerMask:
     serializedVersion: 2
     m_Bits: 55
   scan2D: 1
   sizeY: 1
   debug: 0
-  showUnblocked: 1
-  showBlocked: 1
 --- !u!4 &459441683
 Transform:
   m_ObjectHideFlags: 0
@@ -185,7 +184,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 459441681}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 56f09fc2aa924e24793d4d8327208366, type: 3}
   m_Name: 
@@ -204,6 +203,43 @@ MonoBehaviour:
   instantScan: 0
   loopSpeed: 0.1
   loopNumber: 10
+  showBlocked: 1
+  showOpen: 1
+  showClosed: 1
+  showNodes: 1
+  open: []
+  closed: []
+  worldScanner: {fileID: 459441682}
+--- !u!114 &459441685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 459441681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 178ec532f61a79d4d929b8e4d6ea00cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  startPos: {x: 0, y: 0, z: 0}
+  targetPos: {x: 0, y: 0, z: 12}
+  instantScan: 0
+  loopSpeed: 0.1
+  loopNumber: 1
+  showBlocked: 1
+  showOpen: 1
+  showClosed: 1
+  showNodes: 1
   open: []
   closed: []
   worldScanner: {fileID: 459441682}
@@ -505,7 +541,7 @@ Transform:
   m_GameObject: {fileID: 924891817}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.3366182, z: -0, w: 0.9416412}
-  m_LocalPosition: {x: 3.88, y: 0, z: 8.66}
+  m_LocalPosition: {x: 1.47, y: 0, z: 10.23}
   m_LocalScale: {x: 2.4040163, y: 5.9747, z: 7.7911}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -610,7 +646,7 @@ Transform:
   m_GameObject: {fileID: 1031576869}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.77, y: 0, z: 14.8}
+  m_LocalPosition: {x: 4.96, y: 0, z: 13.01}
   m_LocalScale: {x: 5.4317, y: 5.9747, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -715,7 +751,7 @@ Transform:
   m_GameObject: {fileID: 1367555975}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 17.16, y: 0, z: 11.07}
+  m_LocalPosition: {x: 13.78, y: 0, z: 7.4}
   m_LocalScale: {x: 2.4040163, y: 5.9747, z: 7.7911}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -820,7 +856,7 @@ Transform:
   m_GameObject: {fileID: 1539563976}
   serializedVersion: 2
   m_LocalRotation: {x: 0.8307914, y: -0, z: -0, w: 0.5565838}
-  m_LocalPosition: {x: 8.95, y: 1.02, z: 9.02}
+  m_LocalPosition: {x: 11.58, y: 1.02, z: 12.31}
   m_LocalScale: {x: 5.9751825, y: 0.64120483, z: 7.7911}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -886,8 +922,8 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
-  orthographic size: 5
+  orthographic: 1
+  orthographic size: 13.53
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -911,13 +947,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1889298937}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 10, y: 10, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

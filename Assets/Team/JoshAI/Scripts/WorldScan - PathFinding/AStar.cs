@@ -24,7 +24,7 @@ public class AStar : SerializedMonoBehaviour
     private List<Node> nextOpen = new List<Node>();
     private Node node;
     private bool foundTarget = false;
-    private List<Vector3Int> finalPath = new List<Vector3Int>();
+    private List<Node> finalPath = new List<Node>();
     
     // Start is called before the first frame update
     void Start()
@@ -92,11 +92,15 @@ public class AStar : SerializedMonoBehaviour
             }
         }
 
+        Node currentNode = worldScanner.gridOfObstacles[targetPos.x, targetPos.y, targetPos.z];
         //todo find path
-        while (true)
+        while (currentNode.parent != null)
         {
-            
+            finalPath.Add(currentNode);
+            currentNode = currentNode.parent;
         }
+
+        finalPath.Reverse();
     }
 
     private void Fill(Vector3Int currentPos, Node node)
@@ -108,6 +112,11 @@ public class AStar : SerializedMonoBehaviour
         }
         wasOpen.Add(node);
 
+        if (currentPos == targetPos)
+        {
+            foundTarget = true;
+            return;
+        }
         for(int x = -1; x < 2; x++)
         {
             for (int z = -1; z < 2; z++)
@@ -119,16 +128,15 @@ public class AStar : SerializedMonoBehaviour
                         //check to see the node exists please :)
                         //done
                         Vector3Int nextPos = new Vector3Int(currentPos.x + x, currentPos.y + y, currentPos.z + z);
-                        if (nextPos.x < 0 || nextPos.y < 0 || nextPos.z < 0 || nextPos.x >= worldScanner.size.x ||
-                            nextPos.y >= worldScanner.sizeY || nextPos.z >= worldScanner.size.z)
+                        if (nextPos.x < 0 || nextPos.y < 0 || nextPos.z < 0 || nextPos.x >= worldScanner.size.x || nextPos.y >= worldScanner.sizeY || nextPos.z >= worldScanner.size.z)
                         {
                             continue;
                         }
 
                         Node nextWorldNode = worldScanner.gridOfObstacles[nextPos.x, nextPos.y, nextPos.z];
                         //if (closed.Contains(nextWorldNode) || open.Contains(nextWorldNode) || wasOpen.Contains(nextWorldNode) || nextOpen.Contains(nextWorldNode))
-                        if (open.Contains(nextWorldNode) || wasOpen.Contains(nextWorldNode) ||
-                            nextOpen.Contains(nextWorldNode))
+                        // if (open.Contains(nextWorldNode) || wasOpen.Contains(nextWorldNode) || nextOpen.Contains(nextWorldNode))
+                        if (closed.Contains(nextWorldNode))
                         {
                             continue;
                         }
@@ -138,28 +146,38 @@ public class AStar : SerializedMonoBehaviour
                             float newHCost = Vector3.Distance(nextPos, targetPos);
                             float newGCost = node.gCost + Vector3.Distance(nextPos, currentPos);
                             float newFCost = newHCost + newGCost;
-                            if (closed.Contains(nextWorldNode))
+                            //or if (closed.Contains(nextWorldNode) || open.Contains(nextWorldNode) || nextOpen.Contains(nextWorldNode))
+                            // if (nextWorldNode.parent != null)
+                            // {
+                            if (nextWorldNode != worldScanner.gridOfObstacles[startPos.x, startPos.y, startPos.z])
                             {
-                                if (newFCost < nextWorldNode.fCost)
+                                if (newGCost < nextWorldNode.gCost || !open.Contains(nextWorldNode))
                                 {
                                     nextWorldNode.fCost = newFCost;
                                     nextWorldNode.gCost = newGCost;
                                     nextWorldNode.hCost = newHCost;
                                     nextWorldNode.parent = node;
+                                    if(!open.Contains(nextWorldNode) && !nextOpen.Contains(nextWorldNode))
+                                    {
+                                        nextOpen.Add(nextWorldNode);
+                                    }
                                 }
+                                // else if (!open.Contains(nextWorldNode) && !closed.Contains(nextWorldNode))
+                                // {
+                                //     nextWorldNode.fCost = newFCost;
+                                //     nextWorldNode.gCost = newGCost;
+                                //     nextWorldNode.hCost = newHCost;
+                                //     nextWorldNode.parent = node;
+                                // }
                             }
-                            else
-                            {
-                                nextWorldNode.fCost = newFCost;
-                                nextWorldNode.gCost = newGCost;
-                                nextWorldNode.hCost = newHCost;
-                                nextWorldNode.parent = node;
-                                nextOpen.Add(nextWorldNode);
-                                if (nextPos == targetPos)
-                                {
-                                    foundTarget = true;
-                                }
-                            }
+                            // }
+                            // else if (nextWorldNode != worldScanner.gridOfObstacles[startPos.x, startPos.y, startPos.z])
+                            // {
+                            //     nextWorldNode.fCost = newFCost;
+                            //     nextWorldNode.gCost = newGCost;
+                            //     nextWorldNode.hCost = newHCost;
+                            //     nextWorldNode.parent = node;
+                            // }
                         }
                     }
                 }
@@ -226,6 +244,11 @@ public class AStar : SerializedMonoBehaviour
                                     if (startPos == new Vector3Int(x, y, z) && !worldScanner.gridOfObstacles[x, y, z].isBlocked)
                                     {
                                         Gizmos.color = Color.blue;
+                                    }
+
+                                    if (finalPath.Contains(worldScanner.gridOfObstacles[x, y, z]))
+                                    {
+                                        Gizmos.color = Color.magenta;
                                     }
                                     Gizmos.DrawCube(transform.position + new Vector3(x * worldScanner.nodeSize.x, y * worldScanner.nodeSize.y, z * worldScanner.nodeSize.z), worldScanner.nodeSize);
                                 }
