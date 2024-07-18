@@ -12,6 +12,9 @@ public class DijkstraFill : SerializedMonoBehaviour
     public bool instantScan = false;
     public float loopSpeed = 0.000001f;
     public int loopNumber = 10;
+    public bool showBlocked = true;
+    public bool showOpen = true;
+    public bool showClosed = true;
     public bool showNodes = true;
     public List<Node> open;
     public List<Node> closed;
@@ -128,39 +131,59 @@ public class DijkstraFill : SerializedMonoBehaviour
     }
     private void OnDrawGizmos()
     {
-        if (worldScanner != null)
+        if(isActiveAndEnabled)
         {
-            for (int x = 0; x < worldScanner.size.x; x++)
+            if (worldScanner != null)
             {
-                for (int z = 0; z < worldScanner.size.z; z++)
+                for (int x = 0; x < worldScanner.size.x; x++)
                 {
-                    for (int y = 0; y < worldScanner.sizeY; y++)
+                    for (int z = 0; z < worldScanner.size.z; z++)
                     {
-                        if (worldScanner.gridOfObstacles != null)
+                        for (int y = 0; y < worldScanner.sizeY; y++)
                         {
-                            if (worldScanner.gridOfObstacles[x, y, z].isBlocked && worldScanner.showBlocked)
+                            if (worldScanner.gridOfObstacles != null)
                             {
-                                Gizmos.color = Color.red;
-                                //Gizmos.DrawCube(transform.position + new Vector3(x, y, z), Vector3.one);
-                            }
-                            else if (worldScanner.showUnblocked)
-                            {
-                                Gizmos.color = Color.green;
-                                //Gizmos.DrawCube(transform.position + new Vector3(x, y, z), Vector3.one);
-                            }
+                                if (worldScanner.gridOfObstacles[x, y, z].isBlocked && showBlocked)
+                                {
+                                    Gizmos.color = Color.red;
+                                    if (startPos == new Vector3Int(x, y, z))
+                                    {
+                                        Gizmos.color = new Color(0.5f, 0f, 1f, 1f);
+                                    }
+                                    //Gizmos.DrawCube(transform.position + new Vector3(x, y, z), Vector3.one);
+                                }
+                                else
+                                {
+                                    Gizmos.color = Color.clear;
+                                    //Gizmos.DrawCube(transform.position + new Vector3(x, y, z), Vector3.one);
+                                }
 
-                            if (open.Contains(worldScanner.gridOfObstacles[x, y, z]) || nextOpen.Contains(worldScanner.gridOfObstacles[x, y, z]))
-                            {
-                                Gizmos.color = new Color(1f, 0.9215686f, 0.01568628f, 0.5f);
-                            }
+                                if (open.Contains(worldScanner.gridOfObstacles[x, y, z]) || nextOpen.Contains(worldScanner.gridOfObstacles[x, y, z]))
+                                {
+                                    Gizmos.color = new Color(1f, 0.9215686f, 0.01568628f, 0.5f);
+                                    if (!showOpen)
+                                    {
+                                        Gizmos.color = Color.clear;
+                                    }
+                                }
 
-                            if (closed.Contains(worldScanner.gridOfObstacles[x, y, z]))
-                            {
-                                Gizmos.color = Color.grey;
-                            }
-                            if(showNodes)
-                            {
-                                Gizmos.DrawCube(transform.position + new Vector3(x * worldScanner.nodeSize.x, y * worldScanner.nodeSize.y, z * worldScanner.nodeSize.z), worldScanner.nodeSize);
+                                if (closed.Contains(worldScanner.gridOfObstacles[x, y, z]))
+                                {
+                                    Gizmos.color = Color.green;
+                                    if (!showClosed)
+                                    {
+                                        Gizmos.color = Color.clear;
+                                    }
+                                }
+                                
+                                if (showNodes)
+                                {
+                                    if (startPos == new Vector3Int(x, y, z) && !worldScanner.gridOfObstacles[x, y, z].isBlocked)
+                                    {
+                                        Gizmos.color = Color.blue;
+                                    }
+                                    Gizmos.DrawCube(transform.position + new Vector3(x * worldScanner.nodeSize.x, y * worldScanner.nodeSize.y, z * worldScanner.nodeSize.z), worldScanner.nodeSize);
+                                }
                             }
                         }
                     }

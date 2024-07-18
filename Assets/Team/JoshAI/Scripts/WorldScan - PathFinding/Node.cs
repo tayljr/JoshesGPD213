@@ -12,10 +12,4 @@ public class Node
     public float fCost;
 
     public Node parent;
-    
-
-    public Node()
-    {
-        fCost = hCost + gCost;
-    }
 }

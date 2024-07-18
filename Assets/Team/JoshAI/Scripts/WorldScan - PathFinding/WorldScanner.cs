@@ -11,8 +11,6 @@ public class WorldScanner : MonoBehaviour
     public bool scan2D = false;
     public int sizeY = 1;
     public bool debug = false;
-    public bool showUnblocked = false;
-    public bool showBlocked = false;
     
     // Start is called before the first frame update
     void Start()

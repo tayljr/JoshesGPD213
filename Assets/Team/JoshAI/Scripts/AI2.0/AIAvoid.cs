@@ -18,7 +18,7 @@ public class AIAvoid : MonoBehaviour, IAIBehaviour
 
     private float fowardDistance = 0;
     private float averageDisance = 0;
-    private float totalStrength = 0;
+    //private float totalStrength = 0;
     private int totalHit = 0;
 
 
@@ -156,6 +156,6 @@ public class AIAvoid : MonoBehaviour, IAIBehaviour
     {
         // Debug.Log("cal" + lastAngle);
         return Mathf.RoundToInt(Mathf.Abs(lastAngle * 5) + averageDisance * 3 + totalHit / rays);
-        return Mathf.RoundToInt(Mathf.Abs(lastAngle * 5));
+        //return Mathf.RoundToInt(Mathf.Abs(lastAngle * 5));
     }
 }
