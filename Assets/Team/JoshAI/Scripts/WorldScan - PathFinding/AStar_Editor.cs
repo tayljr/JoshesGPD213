@@ -12,5 +12,9 @@ public class AStar_Editor : Editor
         {
             (target as AStar)?.StartFill();
         }
+        if (GUILayout.Button("STOP"))
+        {
+            (target as AStar)?.StopFill();
+        }
     }
 }

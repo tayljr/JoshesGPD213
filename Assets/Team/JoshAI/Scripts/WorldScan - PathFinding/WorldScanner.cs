@@ -88,4 +88,16 @@ public class WorldScanner : MonoBehaviour
             }
         }
     }
+
+    
+    //todo make grid space to world space converters
+    public Vector3 GridToWorld(Vector3Int gridPos)
+    {
+        return new Vector3(0, 0, 0);
+    }
+
+    public Vector3Int WorldToGrid(Vector3 worldPos)
+    {
+        return new Vector3Int(0, 0, 0);
+    }
 }

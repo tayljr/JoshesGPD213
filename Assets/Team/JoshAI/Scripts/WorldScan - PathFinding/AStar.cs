@@ -40,12 +40,18 @@ public class AStar : SerializedMonoBehaviour
     {
         StartCoroutine(StartFill(startPos));
     }
+
+    public void StopFill()
+    {
+        StopAllCoroutines();
+    }
     
     IEnumerator StartFill(Vector3Int currentPos)
     {
         //todo handle diagonals through walls
         open.Clear();
         closed.Clear();
+        finalPath.Clear();
         foundTarget = false;
         //need to change current pos to get pos from node ... i think + inside while loop
         //done
