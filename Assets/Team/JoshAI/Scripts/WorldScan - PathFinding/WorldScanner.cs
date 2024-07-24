@@ -93,11 +93,17 @@ public class WorldScanner : MonoBehaviour
     //todo make grid space to world space converters
     public Vector3 GridToWorld(Vector3Int gridPos)
     {
-        return new Vector3(0, 0, 0);
+        return new Vector3(transform.position.x + nodeSize.x * gridPos.x, transform.position.y + nodeSize.y * gridPos.y, transform.position.z + nodeSize.z * gridPos.z);
     }
-
+        
+    //start + size * Gpos = Wpos
+    /*
+     * size * Gpos = Wpos - start
+     * Gpos = (Wpos - start) / size
+     */
+    
     public Vector3Int WorldToGrid(Vector3 worldPos)
     {
-        return new Vector3Int(0, 0, 0);
+        return Vector3Int.FloorToInt(new Vector3((worldPos.x - transform.position.x) / nodeSize.x, (worldPos.y - transform.position.y) / nodeSize.y, (worldPos.z - transform.position.z) / nodeSize.z));
     }
 }
